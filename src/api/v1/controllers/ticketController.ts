@@ -25,6 +25,14 @@ const sendBadRequest = (
   });
 };
 
+const getNumericId = (
+  value: string
+): number | null => {
+  const id = Number(value);
+
+  return Number.isNaN(id) ? null : id;
+};
+
 export const getHealth = (
   _req: Request,
   res: Response
@@ -48,9 +56,14 @@ export const handleGetTicketById = (
   req: Request,
   res: Response
 ): void => {
-  const ticket = getTicketById(
-    Number(req.params.id)
-  );
+  const id = getNumericId(req.params.id);
+
+  if (id === null) {
+    sendNotFound(res);
+    return;
+  }
+
+  const ticket = getTicketById(id);
 
   if (!ticket) {
     sendNotFound(res);
@@ -79,9 +92,16 @@ export const handleUpdateTicket = (
   req: Request,
   res: Response
 ): void => {
+  const id = getNumericId(req.params.id);
+
+  if (id === null) {
+    sendNotFound(res);
+    return;
+  }
+
   try {
     const ticket = updateTicket(
-      Number(req.params.id),
+      id,
       req.body
     );
 
@@ -100,9 +120,14 @@ export const handleDeleteTicket = (
   req: Request,
   res: Response
 ): void => {
-  const deletedTicket = deleteTicket(
-    Number(req.params.id)
-  );
+  const id = getNumericId(req.params.id);
+
+  if (id === null) {
+    sendNotFound(res);
+    return;
+  }
+
+  const deletedTicket = deleteTicket(id);
 
   if (!deletedTicket) {
     sendNotFound(res);
@@ -118,10 +143,15 @@ export const handleGetTicketUrgency = (
   req: Request,
   res: Response
 ): void => {
+  const id = getNumericId(req.params.id);
+
+  if (id === null) {
+    sendNotFound(res);
+    return;
+  }
+
   const ticketWithUrgency =
-    getTicketUrgencyById(
-      Number(req.params.id)
-    );
+    getTicketUrgencyById(id);
 
   if (!ticketWithUrgency) {
     sendNotFound(res);
