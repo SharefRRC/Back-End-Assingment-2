@@ -1,10 +1,10 @@
 {
   "name": "support-ticket-management-api",
   "version": "1.0.0",
-  "description": "Module 2 assignment - Routes and HTTP Methods",
+  "description": "Module 2 assignment - Support Ticket Management API",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
+    "dev": "nodemon --watch . --ext ts --exec ts-node server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "test": "jest --runInBand",
