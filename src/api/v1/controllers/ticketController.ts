@@ -26,11 +26,17 @@ const sendBadRequest = (
 };
 
 const getNumericId = (
-  value: string
+  value: string | string[]
 ): number | null => {
+  if (Array.isArray(value)) {
+    return null;
+  }
+
   const id = Number(value);
 
-  return Number.isNaN(id) ? null : id;
+  return Number.isNaN(id)
+    ? null
+    : id;
 };
 
 export const getHealth = (
