@@ -25,7 +25,10 @@ const getNumericId = (value) => {
 const getHealth = (_req, res) => {
     res.status(httpStatus_1.HTTP_STATUS.OK).json({
         status: 'ok',
-        message: 'Support Ticket API is running'
+        uptime: process.uptime(),
+        message: 'Support Ticket API is running',
+        timestamp: new Date().toISOString(),
+        version: '1.0.0'
     });
 };
 exports.getHealth = getHealth;

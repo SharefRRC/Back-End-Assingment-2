@@ -45,7 +45,10 @@ export const getHealth = (
 ): void => {
   res.status(HTTP_STATUS.OK).json({
     status: 'ok',
-    message: 'Support Ticket API is running'
+    uptime: process.uptime(),
+    message: 'Support Ticket API is running',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0'
   });
 };
 
